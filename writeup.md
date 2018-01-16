@@ -33,7 +33,7 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![alt text][image1]
+![alt text][image1]  
 
 ### Pipeline (single images)
 To explain how the pipline works, we will walk through it step by step by testing on the image: test1.jpg in the test_image folder. This is one of the hardest images to work on, due to the color change on the road.
@@ -43,7 +43,7 @@ To explain how the pipline works, we will walk through it step by step by testin
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![alt text][image2]  
 The undistorted image becomes:
-![img](undist.jpg "Undistorted image")
+![img](undist.jpg "Undistorted image")  
 
 #### 2. Color and gradient thresholding.
 
@@ -53,7 +53,7 @@ combined[((gradx == 1) & (grady == 1)) | ((mag_binary == 1) & (dir_binary == 1))
 ```  
 The resulting output is:  
 
-![img](combined.jpg "Combined thresholds")
+![img](combined.jpg "Combined thresholds")  
 
 
 #### 3. Perspective transform.
@@ -83,7 +83,7 @@ This resulted in the following source and destination points:
 
  Since the calibration is called before the definition of the pipeline, mtx and dist are automatically passed to the function (very cool python trick).  We find the prespective transform matrix by calling: `M = cv2.getPerspectiveTransform(src, dst)`. We also save in inverse tranform matrix `Minv = cv2.getPerspectiveTransform(dst, src)`. Then we preform the prespective tranform (line 37 in test.py).
 The result is:  
-![img](warped.jpg "Warp")
+![img](warped.jpg "Warp")  
 
 #### 4. Cruve fitting for the left and right sides of the lane.
 This part is done in the function `sliding_window` defined in trainer.py (defined within the pipeline). The basic idea is to start from the bottom of the image with two windows (of fixed sizes). The left and right lane lines should be at the center of these windows. To do so, we start by finding the peaks from a historgram of pixel densities. These peaks tell us where the lanes start. After defining the starts, we fit the pixels in each window into a second order polynomial using `polyfit`. Then we proceed up the image by sliding the windows. The result of this process is visualized in this image:
@@ -101,18 +101,18 @@ The same is done for the right lane (lines 218 and 219 in test.py). The position
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![img](draw_img.jpg "Final result")
+![img](draw_img.jpg "Final result")  
 
 ---
 
 ### Pipeline (video)
 
 Here's a [youtube link to my video result](https://youtu.be/iNPjBX5xpRw). A copy of the video is also saved in this repository (project_video_labeled.mp4)
-
 ---
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The hardest part of this project was to find the correct thresholds for different colors from different color spaces, especially in the example image shown here. Even after extensive tuning of thresholds, the pipeline performs differently on the challenge videos. It is difficult to generalize only using thresholding features. It is worth investigating if we can utilize deep learning approaches to automatically find the relevant features and label lines (End-to-End).  
+This pipeline can be particulary effective in controlled environments such as factories, where the relevant features don't change over time.
