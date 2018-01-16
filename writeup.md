@@ -45,16 +45,20 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 The undistorted image becomes:
 ![img](undist.jpg "Undistorted image")
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### 2. Color and gradient thresholding.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image using the function `apply_thresholds(image)`, which consistes of two color thresholding functions combined with four gradient thresholding functions. We found it very useful to use the L layer from Lab color space. We also used the S layer from the HLS color space. These two were combined with x-gradient, y-gradient, magnitue gradient, and directions gradient binary images. The combination is done in at line 165 in helpers.py: 
+```python
+combined[((gradx == 1) & (grady == 1)) | ((mag_binary == 1) & (dir_binary == 1)) | ((S_bin == 1) | (L_bin == 1))] = 1
+```  
+The resulting output is:  
 
-![alt text][image3]
+![img](combined.jpg "Combined thresholds")
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+#### 3. Perspective transform.
 
+To do perspective tranform, we define src and dst as follows (line 32 and 33).
 ```python
 src = np.float32(
     [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
@@ -77,9 +81,9 @@ This resulted in the following source and destination points:
 | 1127, 720     | 960, 720      |
 | 695, 460      | 960, 0        |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
-
-![alt text][image4]
+ Since the calibration is called before the definition of the pipeline, mtx and dist are automatically passed to the function (very cool python trick).  We find the prespective transform matrix by calling: `M = cv2.getPerspectiveTransform(src, dst)`. We also save in inverse tranform matrix `Minv = cv2.getPerspectiveTransform(dst, src)`. Then we preform the prespective tranform (line 37 in test.py).
+The result is:  
+![img](warped.jpg "Warp")
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
