@@ -26,7 +26,7 @@ The goals / steps of this project are the following:
 
 ---
 ### Camera Calibration
-
+Note: The majority of the code in this project is taken from the lectures.  
 This is done via the function `calibrate()` in helpers.py.
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
@@ -86,10 +86,8 @@ The result is:
 ![img](warped.jpg "Warp")
 
 #### 4. Cruve fitting for the left and right sides of the lane.
-
-
-
-![img](lane_fit.jpg "fitting pols")
+This part is done in the function `sliding_window` defined in trainer.py (defined within the pipeline). The basic idea is to start from the bottom of the image with two windows (of fixed sizes). The left and right lane lines should be at the center of these windows. To do so, we start by finding the peaks from a historgram of pixel densities. These peaks tell us where the lanes start. After defining the starts, we fit the pixels in each window into a second order polynomial using `polyfit`. Then we proceed up the image by sliding the windows. The result of this process is visualized in this image:
+![img](lane_fit.jpg "fitting pols")  
 
 #### 5. Radius of curvature and car position relative to the center of the lane.
 We used this [tutorial](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) to calculate the radius of curvature of the lane. 
