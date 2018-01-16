@@ -36,8 +36,9 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 ![alt text][image1]
 
 ### Pipeline (single images)
+To explain how the pipline works, we will walk through it step by step by testing on the image: test1.jpg in the test_image folder
 
-#### 1. Provide an example of a distortion-corrected image.
+#### 1. Correcting distortion.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![alt text][image2]
