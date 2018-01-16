@@ -99,9 +99,6 @@ left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)*
 ```
 The same is done for the right lane (lines 218 and 219 in test.py). The position is found through lines 223 to 228. Basically, we find the x-intercept for the left and right sides of the lane. Then we find the distance from the center of the image (car position) to the midpoint of the two intercepts (middle of the lane).
 
-
-I did this in lines # through # in my code in `my_other_file.py`
-
 #### 6. Final image result after drawing lanes and data.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
