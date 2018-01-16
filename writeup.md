@@ -41,7 +41,9 @@ To explain how the pipline works, we will walk through it step by step by testin
 #### 1. Correcting distortion.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+![alt text][image2]  
+The undistorted image becomes:
+![img](undist.jpg "Undistorted image")
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
