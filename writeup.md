@@ -89,7 +89,7 @@ The result is:
 
 
 
-![img](.lane_fit "fitting pols")
+![img](lane_fit.jpg "fitting pols")
 
 #### 5. Radius of curvature and car position relative to the center of the lane.
 We used this [tutorial](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) to calculate the radius of curvature of the lane. 
