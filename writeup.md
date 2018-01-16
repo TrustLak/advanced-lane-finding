@@ -36,7 +36,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 ![alt text][image1]
 
 ### Pipeline (single images)
-To explain how the pipline works, we will walk through it step by step by testing on the image: test1.jpg in the test_image folder
+To explain how the pipline works, we will walk through it step by step by testing on the image: test1.jpg in the test_image folder. This is one of the hardest images to work on, due to the color change on the road.
 
 #### 1. Correcting distortion.
 
@@ -85,13 +85,20 @@ This resulted in the following source and destination points:
 The result is:  
 ![img](warped.jpg "Warp")
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Cruve fitting for the left and right sides of the lane.
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
-![alt text][image5]
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+![img](.lane_fit "fitting pols")
+
+#### 5. Radius of curvature and car position relative to the center of the lane.
+We used this [tutorial](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) to calculate the radius of curvature of the lane. 
+Calculate the radius using the following formula:
+```python
+left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
+```
+The same is done for the right lane (lines 218 and 219 in test.py). The position is found through lines 223 to 228. Basically, we find the x-intercept for the left and right sides of the lane. Then we find the distance from the center of the image (car position) to the midpoint of the two intercepts (middle of the lane).
+
 
 I did this in lines # through # in my code in `my_other_file.py`
 
