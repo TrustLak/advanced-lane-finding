@@ -22,3 +22,4 @@ The images for camera calibration are stored in the folder called `camera_cal`. 
 
 Examples of the output from each stage of the pipeline are stored in the folder called `ouput_images`. See the writeup for the details.
 
+## [Notes](https://github.com/TrustLak/advanced-lane-finding/blob/master/writeup.md)
