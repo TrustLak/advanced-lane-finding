@@ -115,7 +115,5 @@ Here's a [youtube link to my video result](https://youtu.be/iNPjBX5xpRw). A copy
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
 The hardest part of this project was to find the correct thresholds for different colors from different color spaces, especially in the example image shown here. Even after extensive tuning of thresholds, the pipeline performs differently on the challenge videos. It is difficult to generalize only using thresholding features. It is worth investigating if we can utilize deep learning approaches to automatically find the relevant features and label lines (End-to-End).  
 This pipeline can be particulary effective in controlled environments such as factories, where the relevant features don't change over time.
