@@ -26,7 +26,7 @@ The goals / steps of this project are the following:
 
 ---
 ### Code
-To test the pipeline on a video or a single image, run `python test.py`. To see the functions used in this project, take a look at helpers.py. Some functions are taken from the lectures.  
+To test the pipeline on a video or a single image, run `python test.py`. To see the functions used in this project, take a look at helpers.py.
 
 ### Camera Calibration
 This is done via the function `calibrate()` in helpers.py.
